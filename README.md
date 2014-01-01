@@ -1,4 +1,4 @@
-CGOL (Conway's game of life), a python implementation
+CGOL
 =================
 
 CGOL is a python implementation of Conway's game of life.
@@ -9,4 +9,4 @@ The user can change three global variables: the size of the matrix, a time perio
 
 The changes of life
 -----------
-The program starts of by making a matrix at random using the user defined chance of life and displays them in the console. Then it calculates future matrices after Conway's rules (http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) and displays them in the console.
+The program starts of by making a matrix at random using the user defined "chance of life" parameter and displays it in the console. Future life is then calculated after (Conway's rules)[http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life] and displays them in the console.
