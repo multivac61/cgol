@@ -34,6 +34,9 @@ class GameOfLife:
         self.current_grid, self.future_grid = np.zeros((n, m)), np.zeros((n, m))
 
     def evolve(self):
+        """
+        Evolve current grid as dictated by the rule of Life
+        """
         for row in range(self.N):
             for col in range(self.M):
                 self.evolve_cell(row, col)
@@ -41,9 +44,19 @@ class GameOfLife:
         self.current_grid = np.copy(self.future_grid)
 
     def randomize(self, chance):
+        """
+        Randomly populate the current grid with a given chance
+        :param chance: How likely it is for each cell to spring to life
+        """
         self.current_grid = np.vectorize(lambda x: 1 if x > chance else 0)(np.random.rand(self.N, self.M))
 
     def neighbours(self, i, j):
+        """
+        Returns how many alive neighbours the cell at point (i, j) has.
+        :param i: i-th row
+        :param j: j-th column
+        :return: number of alive neighbours to cell (i, j)
+        """
         alive_neighbours = 0
         for (ii, jj) in self.Offsets:
             x, y = i + ii, j + jj
@@ -53,6 +66,11 @@ class GameOfLife:
         return alive_neighbours
 
     def evolve_cell(self, i, j):
+        """
+        Evolve the cell at (i, j) at future grid
+        :param i: i-th row
+        :param j: j-th column
+        """
         alive = (self.current_grid[i, j] == 1)
         neighbours = self.neighbours(i, j)
 
@@ -64,11 +82,18 @@ class GameOfLife:
         self.future_grid[i, j] = next_state
 
 
-def clear_screen():
+def clear_console():
+    """
+    Clear the Python console.
+    """
     system('cls' if name == 'nt' else 'clear')
 
 
 def query_user():
+    """
+    Ask user for size of squared life, the chance of initial life and the timestep to delay
+    :return: grid size, chance of life [0, 1[ and time delay between evolutions
+    """
     print """Oh holy ruler, welcome to \n
         #####  #####  #####  ##   [v.02]
         ##     ##     ##  #  ##
@@ -102,4 +127,4 @@ if __name__ == "__main__":
         gol.evolve()
 
         sleep(timestep)
-        clear_screen()
+        clear_console()
